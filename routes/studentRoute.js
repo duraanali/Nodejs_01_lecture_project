@@ -85,6 +85,8 @@ router.post("/", async (req, res) => {
       updatedAt: new Date().toISOString(),
     };
 
+
+
     // 5. add the new student to the list of all students using writeStudents function
     students.push(newStudent);
     await writeStudents(students);
@@ -97,6 +99,60 @@ router.post("/", async (req, res) => {
 });
 
 // 4. Update student
+
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const students = await getAllStudents();
+
+    const studentIndex = students.findIndex(
+      (student) => student.id === Number(id)
+    );
+
+    if (studentIndex === -1) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    students[studentIndex] = {
+      ...students[studentIndex],
+      ...req.body,
+      id: Number(id),
+      updatedAt: new Date().toISOString(),
+    };
+
+    await writeStudents(students);
+    res.status(200).json(students[studentIndex]);
+  } catch (error) {
+    res.status(500).json({ error: "Cannot update student" });
+  }
+});
+
+
 // 5. Delete student
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const students = await getAllStudents();
+
+    const studentIndex = students.findIndex(
+      (student) => student.id === Number(id)
+    );
+
+    if (studentIndex === -1) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    const deletedStudent = students.splice(studentIndex, 1)[0];
+
+    await writeStudents(students);
+
+    res.status(200).json({
+      message: "Student deleted successfully",
+      student: deletedStudent,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Cannot delete student" });
+  }
+});
 
 export default router;
