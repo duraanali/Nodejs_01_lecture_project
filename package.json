@@ -12,6 +12,15 @@
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+    "express": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fathiya4545/Nodejs_01_lecture_project.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Fathiya4545/Nodejs_01_lecture_project/issues"
+  },
+  "homepage": "https://github.com/Fathiya4545/Nodejs_01_lecture_project#readme"
 }
