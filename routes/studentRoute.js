@@ -3,6 +3,8 @@ import express from "express";
 // Part of NODE JS built-in methods
 import path from "path";
 import fs from "fs/promises";
+import { error } from "console";
+import { read } from "fs";
 
 // Get the file path
 const dataFilePath = path.resolve("data/students.json");
@@ -97,6 +99,78 @@ router.post("/", async (req, res) => {
 });
 
 // 4. Update student
+
+
+router.put("/:id", async (req, res) => {
+ console.log(req.id, "req.id")
+  try {
+    const {id} = req.params
+    console.log(id, "id")
+
+    const students = await getAllStudents();
+    console.log(students, "students")
+
+    const currentStudent = students.find((student) => student.id === Number(id));
+
+    
+    if (!currentStudent) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    console.log(currentStudent, "currentstudent")
+    
+    const { name, email, age, grade, major } = req.body;
+
+
+   
+
+ 
+      
+     currentStudent.name = name || currentStudent.name,
+     currentStudent.email =  email || currentStudent.email,
+      currentStudent.age = age || currentStudent.age,
+      currentStudent.grade = grade || currentStudent.grade,
+      currentStudent.major = major || currentStudent.major,
+      currentStudent.updatedAt = new Date().toISOString(),
+
+ 
+
+   
+    await writeStudents(students)
+
+    res.status(200).json(currentStudent)
+  } catch (error) {
+
+    console.log(error)
+    // res.status(500).json({error, msg : "Failed to updated student"})
+
+  }
+
+})
+
 // 5. Delete student
+
+router.delete("/:id", async (req, res) => {
+  console.log(req.params)
+  try {
+    const {id} = req.params
+
+    const students = await getAllStudents()
+    
+    const studentIndex = students.findIndex((student) => student.id === Number(id))
+    console.log(studentIndex, "sudentindex")
+    if (studentIndex === -1  ) {
+      return res.json({error: "student not found"})
+    }
+
+    students.slice(studentIndex, 1)[0]
+    console.log(students, "test")
+    await writeStudents(students)
+
+  res.status(200).json(students)
+} catch {
+  res.status(500).json({error,msg: "Failed to delete student" })
+  
+}})
+
 
 export default router;

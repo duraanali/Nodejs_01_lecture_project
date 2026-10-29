@@ -43,30 +43,10 @@
     "id": 5,
     "name": "David Brown",
     "email": "david.brown@email.com",
-    "age": 23,
+    "age": 25,
     "grade": "A+",
     "major": "Engineering",
     "createdAt": "2024-01-15T12:30:00.000Z",
-    "updatedAt": "2024-01-15T12:30:00.000Z"
-  },
-  {
-    "id": 6,
-    "name": "Mohamed Ali",
-    "email": "ali@email.com",
-    "age": null,
-    "grade": null,
-    "major": null,
-    "createdAt": "2025-11-16T17:00:45.532Z",
-    "updatedAt": "2025-11-16T17:00:45.535Z"
-  },
-  {
-    "id": 7,
-    "name": "Mohamed Ali",
-    "email": "ali@email.com",
-    "age": null,
-    "grade": null,
-    "major": null,
-    "createdAt": "2025-11-16T17:03:42.570Z",
-    "updatedAt": "2025-11-16T17:03:42.571Z"
+    "updatedAt": "2026-10-27T23:03:17.363Z"
   }
 ]
